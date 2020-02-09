@@ -29,5 +29,5 @@ if __name__ == '__main__':
         sheet1.write(index, 0, spectograms[index].spectogram)
         sheet1.write(index, 1, str(data[num]))
 
-    wb.save('bla.xls')
+    wb.save('result.xls')
     print(sm / len(predd))
