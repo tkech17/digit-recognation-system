@@ -8,7 +8,6 @@ from os.path import isfile, join
 import scipy.io.wavfile as wav
 from matplotlib import pyplot as plt
 
-VOICE_DIRECTORY = "recordings/"
 SPECTOGRAMS_PATH = "spectograms/"
 
 
@@ -40,17 +39,17 @@ def __convertAutioIntoSpectogram(audio_path: str, dest_path: str):
     return dest_path
 
 
-def voiceToSpectograms():
+def voiceToSpectograms(voice_dirs):
     if os.path.exists(SPECTOGRAMS_PATH):
         removeImagesDirecotory()
     os.mkdir(SPECTOGRAMS_PATH)
-    file_names = [f for f in listdir(VOICE_DIRECTORY) if isfile(join(VOICE_DIRECTORY, f)) and f.endswith(".wav")]
     res = []
-    for file_name in file_names:
-        number = file_name[0]
-        audio_path = VOICE_DIRECTORY + file_name
-        res.append(
-            VoiceData(number, __convertAutioIntoSpectogram(audio_path, SPECTOGRAMS_PATH + file_name[:-3] + "PNG")))
+    for voice_dir in voice_dirs:
+        file_names = [f for f in listdir(voice_dir) if isfile(join(voice_dir, f)) and f.endswith(".wav")]
+        for file_name in file_names:
+            number = file_name[0]
+            audio_path = voice_dir + file_name
+            res.append(VoiceData(number, __convertAutioIntoSpectogram(audio_path, SPECTOGRAMS_PATH + file_name[:-3] + "PNG")))
     return res
 
 

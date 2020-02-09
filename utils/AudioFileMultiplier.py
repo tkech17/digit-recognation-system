@@ -4,7 +4,7 @@ import librosa
 import numpy
 import soundfile
 
-DATA_DIR = 'recordings/'
+DATA_DIR = 'noise_voices/'
 
 
 def addNoisedAudios(noise_rate):
