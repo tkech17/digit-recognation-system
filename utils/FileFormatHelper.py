@@ -49,7 +49,10 @@ def voiceToSpectograms(voice_dirs):
         for file_name in file_names:
             number = file_name[0]
             audio_path = voice_dir + file_name
-            res.append(VoiceData(number, __convertAutioIntoSpectogram(audio_path, SPECTOGRAMS_PATH + file_name[:-3] + "PNG")))
+            try:
+                res.append(VoiceData(number, __convertAutioIntoSpectogram(audio_path, SPECTOGRAMS_PATH + file_name[:-3] + "PNG")))
+            except Exception:
+                print("yle")
     return res
 
 

@@ -7,6 +7,25 @@ from keras.utils.np_utils import to_categorical
 from utils.FileFormatHelper import removeImagesDirecotory
 
 
+def prepareData2(spectograms: list):
+    trainset = []
+    testset = []
+    for index, spectogramData in enumerate(spectograms):
+        trainset.append([image.img_to_array(image.load_img(spectogramData.spectogram)), spectogramData.label])
+
+    X_test, X_train, y_test, y_train = getTraindAndTestSets(testset, trainset)
+    X_test, X_train, y_test, y_train = convertTrainAndTestSetsIntoArrays(X_test, X_train, y_test, y_train)
+
+    y_train = to_categorical(y_train)
+
+    X_train /= 255
+    X_test /= 255
+
+    removeImagesDirecotory()
+
+    return X_train, y_train, spectograms
+
+
 def prepareData(spectograms: list):
     trainset = []
     testset = []
@@ -30,6 +49,7 @@ def prepareData(spectograms: list):
     removeImagesDirecotory()
 
     return X_train, X_test, y_train, y_test
+
 
 def convertTrainAndTestSetsIntoArrays(X_test, X_train, y_test, y_train):
     X_train = np.asanyarray(X_train)

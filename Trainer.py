@@ -1,7 +1,12 @@
-import numpy as np
-from keras.models import Sequential
 from keras import optimizers
 from keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D, Dropout
+from keras.models import Sequential
+
+from utils.FileFormatHelper import voiceToSpectograms
+from utils.dataSplitHelper import prepareData
+
+VOICE_DIRECTORY = "recordings/"
+NOISE_VOICE_DIRECTORY = "noise_voices/"
 
 
 def trainModel(X_train, X_test, y_train, y_test):
@@ -44,3 +49,16 @@ def getModel(data_shape):
     model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     return model
+
+
+def prepare():
+    return prepareData(voiceToSpectograms([NOISE_VOICE_DIRECTORY, VOICE_DIRECTORY]))
+
+
+def train():
+    X_train, X_test, y_train, y_test = prepare()
+    trainModel(X_train, X_test, y_train, y_test)
+
+
+if __name__ == "__main__":
+    train()
