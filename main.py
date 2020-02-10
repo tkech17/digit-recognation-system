@@ -31,5 +31,5 @@ if __name__ == '__main__':
         sheet1.write(index, 0, name)
         sheet1.write(index, 1, str(data[num]))
 
-    wb.save('result.xls')
+    wb.save('7.xls')
     print(sm / len(predd))
