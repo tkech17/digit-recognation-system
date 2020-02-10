@@ -26,7 +26,9 @@ if __name__ == '__main__':
                   y_train[index][5] * 5)
         print(data[num], num)
         sm += data[num]
-        sheet1.write(index, 0, spectograms[index].spectogram)
+        files = spectograms[index].spectogram.split("/")
+        name = files[-1].replace('PNG', 'wav')
+        sheet1.write(index, 0, name)
         sheet1.write(index, 1, str(data[num]))
 
     wb.save('result.xls')
